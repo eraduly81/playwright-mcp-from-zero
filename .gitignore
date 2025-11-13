@@ -142,3 +142,6 @@ node_modules/
 .playwright/
 playwright-report/
 
+# Data files and folders
+data/
+
