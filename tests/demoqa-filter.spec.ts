@@ -1,12 +1,24 @@
-// tests/demoqa-filter.spec.ts
-import { test } from '@playwright/test';
-import { DemoQALandingPage } from '../pages/demo-qa/DemoQALandingPage';
+// In pages/demo-qa/DemoQALandingPage.ts
+import { Page, expect } from '@playwright/test';
 
-test.describe('DemoQA Landing Page', () => {
-  test('can filter/search for a term', async ({ page }) => {
-    const landing = new DemoQALandingPage(page);
-    await landing.goto();
-    await landing.search('Book');
-    await landing.expectResultVisible('Book');
-  });
-});
+export class DemoQALandingPage {
+  readonly page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  async goto() {
+    await this.page.goto('https://demoqa.com/');
+  }
+
+  async search(term: string) {
+    // Update the selector to match the search/filter input on the DemoQA page
+    await this.page.fill('input[type="search"], input[placeholder*="search"]', term);
+    await this.page.keyboard.press('Enter');
+  }
+
+  async expectResultVisible(text: string) {
+    await expect(this.page.locator(`text=${text}`)).toBeVisible();
+  }
+}

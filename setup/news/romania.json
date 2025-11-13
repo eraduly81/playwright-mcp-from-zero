@@ -1,0 +1,15 @@
+{
+  "general": {
+    "urls": {
+      "digi":"https://digi24.ro/",
+      "realitatea":"https://www.realitatea.net/",
+      "euronews":"https://www.euronews.ro/"
+    }
+  },
+  "sport": {
+    "urls": {
+      "digisport":"https://www.digisport.ro/",
+      "prosport":"https://www.prosport.ro/"
+    }
+  }
+}

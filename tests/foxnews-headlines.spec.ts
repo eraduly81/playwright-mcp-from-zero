@@ -1,18 +1,14 @@
-// spec: agent generated
-// BASE_URL_FOXNEWS: https://www.foxnews.com/
-
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 import { FoxNewsLandingPage } from '../pages/fox-news/FoxNewsLandingPage';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 test.describe('Fox News Homepage - Headline Extraction', () => {
 
-test.beforeAll(() => {
-  // Run the nav extraction script to update the JSON file before tests
-  execSync('npx ts-node ./pages/fox-news/updateFoxNewsNav.ts', { stdio: 'inherit' });
-});
 
   test('should extract and save main headlines', async ({ page }) => {
     const landing = new FoxNewsLandingPage(page);
