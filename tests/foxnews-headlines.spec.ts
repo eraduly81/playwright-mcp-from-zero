@@ -4,9 +4,16 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
 import { FoxNewsLandingPage } from '../pages/fox-news/FoxNewsLandingPage';
 
 test.describe('Fox News Homepage - Headline Extraction', () => {
+
+test.beforeAll(() => {
+  // Run the nav extraction script to update the JSON file before tests
+  execSync('npx ts-node ./pages/fox-news/updateFoxNewsNav.ts', { stdio: 'inherit' });
+});
+
   test('should extract and save main headlines', async ({ page }) => {
     const landing = new FoxNewsLandingPage(page);
 

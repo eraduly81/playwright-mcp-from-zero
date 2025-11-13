@@ -1,0 +1,13 @@
+{
+  "US": ["Blue City Crime", "Campus Radicals", "Border Crisis", "True Crime"],
+  "Politics": ["Donald Trump", "Senate", "House", "Judiciary", "Foreign Policy", "Fox News Polls", "2025 Elections Coverage"],
+  "World": ["U.N.", "Conflicts", "Terrorism", "Disasters", "Global Economy", "Environment", "Religion", "Scandals"],
+  "Opinion": [],
+  "Media": ["FOX Nation Coverage"],
+  "Entertainment": ["Prince Andrew", "Katy Perry", "Royal Families", "Country Music", "Nicole Kidman"],
+  "Sports": ["NFL", "College Football", "MLB", "NASCAR", "INDYCAR", "NBA", "NHL", "Golf", "Tennis", "FIFA WORLD CUP 26", "UFC", "WWE"],
+  "Lifestyle": ["Travel", "Food & Drink", "Faith", "Discovery", "Games & Quizzes"],
+  "Health": ["Weight Loss", "Cancer", "Brain Health", "Sleep", "Heart Health", "Healthy Living", "Mental Health", "MAHA"],
+  "Video": [],
+  "AI": []
+}
