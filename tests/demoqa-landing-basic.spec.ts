@@ -2,7 +2,7 @@
 // seed: tests/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { DemoQALandingPage } from '../pages/DemoQALandingPage';
+import { DemoQALandingPage } from '../pages/demo-qa/DemoQALandingPage';
 
 test.describe('DemoQA Landing Page Basic Scenarios', () => {
   test('Should display all main menu cards', async ({ page }) => {
