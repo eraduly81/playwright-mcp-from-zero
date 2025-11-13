@@ -26,6 +26,13 @@
         "@playwright/mcp": "github:microsoft/playwright-mcp",
         "@playwright/test": "^1.56.1",
         "@types/node": "^24.10.0",
-        "dotenv": "^17.2.3"
+        "@typescript-eslint/eslint-plugin": "^8.46.4",
+        "@typescript-eslint/parser": "^8.46.4",
+        "dotenv": "^17.2.3",
+        "eslint": "^9.39.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-playwright": "^2.3.0",
+        "eslint-plugin-prettier": "^5.5.4",
+        "prettier": "^3.6.2"
     }
 }
