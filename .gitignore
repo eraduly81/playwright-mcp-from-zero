@@ -144,4 +144,5 @@ playwright-report/
 
 # Data files and folders
 data/
+test-results/
 

@@ -1,0 +1,135 @@
+:root {
+  color-scheme: light;
+  --bg: #f1efe7;
+  --panel: #fff8f0;
+  --accent: #d35400;
+  --accent-dark: #9c3d00;
+  --ink: #1e1b16;
+  --muted: #6f665c;
+  --border: #e2d6c3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #fff3e2, transparent 55%),
+    radial-gradient(circle at 80% 20%, #f8d9c0, transparent 45%), var(--bg);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  display: grid;
+  gap: 24px;
+}
+
+.header {
+  padding: 24px 28px;
+  background: var(--panel);
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  box-shadow: 0 16px 40px rgba(65, 50, 30, 0.12);
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+.panel {
+  background: var(--panel);
+  border-radius: 18px;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  font-weight: 600;
+}
+
+select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: white;
+  font-size: 1rem;
+}
+
+.command {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fdf4e8;
+  border: 1px dashed #e4b68d;
+  color: var(--accent-dark);
+  font-family: "Courier New", monospace;
+}
+
+.run-button {
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.run-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.run-button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(211, 84, 0, 0.25);
+}
+
+.status {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.status-running {
+  color: var(--accent);
+}
+
+.status-error {
+  color: #b00020;
+}
+
+.output {
+  min-height: 180px;
+  background: #1f1b16;
+  color: #f9e9d5;
+  padding: 16px;
+  border-radius: 14px;
+  overflow-x: auto;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 680px) {
+  .app {
+    padding: 32px 16px 48px;
+  }
+
+  .header {
+    padding: 20px;
+  }
+}
