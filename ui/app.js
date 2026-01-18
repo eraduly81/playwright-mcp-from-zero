@@ -8,6 +8,16 @@
     const [output, setOutput] = useState('');
     const [error, setError] = useState('');
     const [running, setRunning] = useState(false);
+    const [sessionOutput, setSessionOutput] = useState('');
+    const [sessionError, setSessionError] = useState('');
+    const [model, setModel] = useState('gpt-realtime');
+    const [voice, setVoice] = useState('');
+    const [instructions, setInstructions] = useState(
+      'You are a concise voice assistant. Use MCP tools when asked.'
+    );
+    const [mcpUrl, setMcpUrl] = useState('');
+    const [mcpOutput, setMcpOutput] = useState('');
+    const [mcpError, setMcpError] = useState('');
 
     useEffect(() => {
       fetch('/api/tests')
@@ -64,6 +74,52 @@
         .finally(() => setRunning(false));
     }
 
+    function createSession() {
+      setSessionOutput('');
+      setSessionError('');
+      fetch('/api/realtime/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: model.trim() || 'gpt-realtime',
+          voice: voice.trim() || undefined,
+          instructions: instructions.trim(),
+        }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            setSessionError(data.error);
+            return;
+          }
+          setSessionOutput(JSON.stringify(data, null, 2));
+        })
+        .catch(err => {
+          setSessionError(`Session failed: ${err.message}`);
+        });
+    }
+
+    function listMcp(endpoint, setBusyLabel) {
+      setMcpOutput(setBusyLabel);
+      setMcpError('');
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ serverUrl: mcpUrl.trim() || undefined }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            setMcpError(data.error);
+            return;
+          }
+          setMcpOutput(JSON.stringify(data, null, 2));
+        })
+        .catch(err => {
+          setMcpError(`MCP failed: ${err.message}`);
+        });
+    }
+
     return React.createElement(
       'div',
       { className: 'app' },
@@ -108,6 +164,98 @@
           'div',
           { key: 'status', className: `status status-${status.toLowerCase()}` },
           `Status: ${status}`
+        ),
+      ]),
+      React.createElement('section', { className: 'panel' }, [
+        React.createElement('h2', { key: 'voice-title' }, 'Realtime voice session'),
+        React.createElement(
+          'label',
+          { key: 'model-label', htmlFor: 'model-input' },
+          'Model'
+        ),
+        React.createElement('input', {
+          key: 'model-input',
+          id: 'model-input',
+          value: model,
+          onChange: e => setModel(e.target.value),
+        }),
+        React.createElement(
+          'label',
+          { key: 'voice-label', htmlFor: 'voice-input' },
+          'Voice (optional)'
+        ),
+        React.createElement('input', {
+          key: 'voice-input',
+          id: 'voice-input',
+          value: voice,
+          placeholder: 'alloy',
+          onChange: e => setVoice(e.target.value),
+        }),
+        React.createElement(
+          'label',
+          { key: 'instructions-label', htmlFor: 'instructions-input' },
+          'Instructions'
+        ),
+        React.createElement('textarea', {
+          key: 'instructions-input',
+          id: 'instructions-input',
+          rows: 3,
+          value: instructions,
+          onChange: e => setInstructions(e.target.value),
+        }),
+        React.createElement(
+          'button',
+          { key: 'session-button', className: 'run-button', onClick: createSession },
+          'Create session'
+        ),
+        React.createElement(
+          'pre',
+          { key: 'session-output', className: 'output' },
+          sessionError ? `Error:\n${sessionError}` : sessionOutput || 'No session yet.'
+        ),
+      ]),
+      React.createElement('section', { className: 'panel' }, [
+        React.createElement('h2', { key: 'mcp-title' }, 'MCP discovery'),
+        React.createElement(
+          'label',
+          { key: 'mcp-label', htmlFor: 'mcp-input' },
+          'MCP server URL'
+        ),
+        React.createElement('input', {
+          key: 'mcp-input',
+          id: 'mcp-input',
+          value: mcpUrl,
+          placeholder: 'https://developers.openai.com/mcp',
+          onChange: e => setMcpUrl(e.target.value),
+        }),
+        React.createElement(
+          'div',
+          { key: 'mcp-actions', className: 'button-row' },
+          [
+            React.createElement(
+              'button',
+              {
+                key: 'mcp-tools',
+                className: 'ghost-button',
+                onClick: () => listMcp('/api/mcp/tools-list', 'Loading tools...'),
+              },
+              'List tools'
+            ),
+            React.createElement(
+              'button',
+              {
+                key: 'mcp-resources',
+                className: 'ghost-button',
+                onClick: () => listMcp('/api/mcp/resources-list', 'Loading resources...'),
+              },
+              'List resources'
+            ),
+          ]
+        ),
+        React.createElement(
+          'pre',
+          { key: 'mcp-output', className: 'output' },
+          mcpError ? `Error:\n${mcpError}` : mcpOutput || 'No MCP data yet.'
         ),
       ]),
       React.createElement('section', { className: 'panel' }, [
