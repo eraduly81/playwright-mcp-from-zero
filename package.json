@@ -13,7 +13,8 @@
         "eslint": "eslint . --ext .ts,.js",
         "lint:fix": "eslint . --ext .ts,.js --fix",
         "prettier": "prettier --write .",
-        "ui:serve": "node ui/server.js"
+        "ui:serve": "node ui/server.js",
+        "evaluate:tags": "node scripts/evaluate-data-tags.js"
     },
     "repository": {
         "type": "git",
