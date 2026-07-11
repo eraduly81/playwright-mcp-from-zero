@@ -30,7 +30,7 @@
     "homepage": "https://github.com/eraduly81/playwright-mcp-from-zero#readme",
     "devDependencies": {
         "@playwright/mcp": "github:microsoft/playwright-mcp",
-        "@playwright/test": "^1.56.1",
+        "@playwright/test": "^1.61.0",
         "@types/node": "^24.10.0",
         "@typescript-eslint/eslint-plugin": "^8.46.4",
         "@typescript-eslint/parser": "^8.46.4",
